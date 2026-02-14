@@ -7,8 +7,8 @@
         "dev": "vite",
         "build": "vite build",
         "build:profiling": "vite build --mode profiling",
-        "preview": "vite preview",
-        "preview:profiling": "vite preview --mode profiling"
+        "preview": "npm run build && vite preview",
+        "preview:profiling": "npm run build:profiling && vite preview --mode profiling"
     },
     "dependencies": {
         "react": "^19.0.0",

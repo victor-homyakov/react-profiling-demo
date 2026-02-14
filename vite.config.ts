@@ -7,15 +7,7 @@ export default defineConfig(({ mode }) => {
     return {
         plugins: [react()],
         resolve: {
-            alias: isProfiling
-                ? [
-                      { find: /^react-dom$/, replacement: "react-dom/profiling" },
-                      {
-                          find: "scheduler/tracing",
-                          replacement: "scheduler/tracing-profiling",
-                      },
-                  ]
-                : undefined,
+            alias: isProfiling ? [{ find: /^react-dom\/client$/, replacement: "react-dom/profiling" }] : undefined,
         },
         server: {
             port: 5173,
