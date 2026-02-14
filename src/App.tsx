@@ -29,6 +29,7 @@ function AppRoutes() {
 
 function AppContent() {
     const { useStrictMode } = useStrictModeContext();
+
     const content = (
         <BrowserRouter>
             <Layout>
