@@ -18,11 +18,8 @@ export function BuildModeIndicator() {
             }}
         >
             <span>
-                <strong>Режим сборки:</strong>{" "}
+                <strong>Сборка react-dom:</strong>{" "}
                 <code style={{ background: "#cbd5e1", padding: "2px 6px", borderRadius: 4 }}>{MODE}</code>
-                {MODE === "development" && " (dev-сборка react-dom)"}
-                {MODE === "production" && " (production-сборка react-dom)"}
-                {MODE === "profiling" && " (profiling-сборка react-dom)"}
             </span>
             <label style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                 <input type="checkbox" checked={useStrictMode} onChange={(e) => setUseStrictMode(e.target.checked)} />
