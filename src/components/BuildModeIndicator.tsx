@@ -1,0 +1,33 @@
+import { useStrictModeContext } from "../contexts/StrictModeContext";
+
+const MODE = import.meta.env.MODE;
+
+export function BuildModeIndicator() {
+    const { useStrictMode, setUseStrictMode } = useStrictModeContext();
+
+    return (
+        <div
+            style={{
+                alignItems: "center",
+                background: "#e2e8f0",
+                borderBottom: "1px solid #cbd5e1",
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "16px",
+                padding: "8px 12px",
+            }}
+        >
+            <span>
+                <strong>Режим сборки:</strong>{" "}
+                <code style={{ background: "#cbd5e1", padding: "2px 6px", borderRadius: 4 }}>{MODE}</code>
+                {MODE === "development" && " (dev-сборка react-dom)"}
+                {MODE === "production" && " (production-сборка react-dom)"}
+                {MODE === "profiling" && " (profiling-сборка react-dom)"}
+            </span>
+            <label style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                <input type="checkbox" checked={useStrictMode} onChange={(e) => setUseStrictMode(e.target.checked)} />
+                <span>Strict Mode</span>
+            </label>
+        </div>
+    );
+}
