@@ -11,6 +11,14 @@ export default defineConfig(({ mode }) => {
         },
         server: {
             port: 5173,
+            headers: {
+                "Document-Policy": "js-profiling",
+            },
+        },
+        preview: {
+            headers: {
+                "Document-Policy": "js-profiling",
+            },
         },
     };
 });

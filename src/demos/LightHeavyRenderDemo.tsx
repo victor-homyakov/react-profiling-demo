@@ -1,4 +1,5 @@
-import { Profiler, useRef, useState } from "react";
+import { Profiler as ReactProfiler, useRef, useState } from "react";
+import { Profiler as NativeProfiler } from "../profiler/profiler";
 
 /** Искусственная задержка в рендере (для «тяжёлого» сценария) */
 function burnCPU(ms: number): void {
@@ -142,8 +143,10 @@ export function LightHeavyRenderDemo() {
     const [isHeavy, setIsHeavy] = useState(false);
     const [profilerRecording, setProfilerRecording] = useState(false);
     const [selfProfilingRecording, setSelfProfilingRecording] = useState(false);
+    const [selfProfilingError, setSelfProfilingError] = useState<string | null>(null);
     const [profilerSummary, setProfilerSummary] = useState<Summary | null>(null);
     const profilerCommitsRef = useRef<ProfilerCommit[]>([]);
+    const nativeProfiler = useRef<NativeProfiler | null>(null);
 
     function handleRender(
         id: string,
@@ -182,23 +185,41 @@ export function LightHeavyRenderDemo() {
     }
 
     function startSelfProfiling() {
-        // TODO
+        setSelfProfilingError(null);
+        nativeProfiler.current = new NativeProfiler();
+        const started = nativeProfiler.current.start();
+        if (!started) {
+            setSelfProfilingError(
+                "Self-profiling API недоступен. Проверь заголовок Document-Policy: js-profiling " +
+                    "(работает только в dev/profiling сборке через npm run dev или npm run preview:profiling).",
+            );
+            return;
+        }
         setSelfProfilingRecording(true);
     }
 
     function stopSelfProfilingAndDownload() {
-        // TODO
+        const profile = nativeProfiler.current?.stop();
         setSelfProfilingRecording(false);
 
-        // const payload = {};
-        // const json = JSON.stringify(payload, null, 2);
-        // const blob = new Blob([json], { type: "application/json" });
-        // const url = URL.createObjectURL(blob);
-        // const a = document.createElement("a");
-        // a.href = url;
-        // a.download = `react-profiler-${Date.now()}.json`;
-        // a.click();
-        // URL.revokeObjectURL(url);
+        profile
+            ?.then((profile) => {
+                console.log("[Native Profiler] Профиль:", profile);
+                if (!profile) {
+                    return;
+                }
+
+                const blob = new Blob([profile], { type: "text/plain" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `native-profiler-${Date.now()}.txt`;
+                a.click();
+                URL.revokeObjectURL(url);
+            })
+            .catch((error) => {
+                console.error("[Native Profiler] Ошибка:", error);
+            });
     }
 
     return (
@@ -271,13 +292,16 @@ export function LightHeavyRenderDemo() {
                     </button>
                     {selfProfilingRecording && <span style={{ color: "#dc2626", fontWeight: 500 }}>Идёт запись…</span>}
                 </div>
+                {selfProfilingError && (
+                    <p style={{ color: "#dc2626", fontSize: "0.85em", marginTop: 8 }}>{selfProfilingError}</p>
+                )}
             </section>
 
             <section>
                 <h3 style={{ margin: "0 0 8px", fontSize: "1.1em" }}>Контент (обёрнут в &lt;Profiler&gt;)</h3>
-                <Profiler id={isHeavy ? "heavy" : "light"} onRender={handleRender}>
+                <ReactProfiler id={isHeavy ? "heavy" : "light"} onRender={handleRender}>
                     <LightOrHeavyRenderScenario isHeavy={isHeavy} />
-                </Profiler>
+                </ReactProfiler>
             </section>
         </div>
     );
