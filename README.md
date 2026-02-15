@@ -38,6 +38,22 @@
 - `src/hooks/` — кастомные хуки.
 - `src/contexts/` — контексты (например, Strict Mode).
 
+## Демо по разделам
+
+### 3. React Profiler
+
+- **Страница:** раздел «3. React Profiler».
+- **Лёгкий и тяжёлый рендер:** переключатель «Лёгкий рендер» / «Тяжёлый рендер»; в тяжёлом режиме в рендере выполняется искусственная задержка (~80 ms), в React DevTools Profiler виден долгий commit.
+- **Profiler:** кнопки «Старт Profiler» / «Стоп» — запись коммитов через `<Profiler onRender>`, сводка выводится на страницу и в консоль.
+- **Self-profiling:** кнопки «Старт Self-profiling» / «Стоп и скачать» — запись профиля, по остановке экспорт профиля в JSON и скачивание файла.
+- **Как показывать:** записать профиль в React DevTools (Record → действия на странице → стоп), разобрать флеймграф. Для production-подобного билда: `npm run build:profiling` и `npm run preview:profiling`.
+
+### 4. DevTools Performance
+
+- **Страница:** раздел «4. DevTools Performance».
+- **Сценарий:** тот же тяжёлый рендер (список + искусственная задержка). Записать в Chrome DevTools Performance, посмотреть блок Scripting.
+- **Strict Mode:** переключатель в шапке; при включённом Strict Mode в dev React дважды вызывает рендер — в записи Performance два пика. Сравнить с/без Strict Mode.
+
 ## Требования и план
 
 - [Требования к демо](requirements.md)

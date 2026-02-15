@@ -4,7 +4,7 @@ const nav = [
     { path: "/", label: "Главная" },
     { path: "/builds", label: "1. Сборки и Strict mode" },
     { path: "/devtools", label: "2. React DevTools" },
-    { path: "/profiler", label: "3. React Profiler" },
+    { path: "/profiler", label: "3. React Profiler и Self-profiling API" },
     { path: "/performance", label: "4. DevTools Performance" },
     { path: "/transition", label: "5. useTransition" },
     { path: "/inp", label: "6. INP и мемоизация" },
