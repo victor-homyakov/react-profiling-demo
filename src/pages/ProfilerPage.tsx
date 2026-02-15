@@ -18,6 +18,8 @@ export function ProfilerPage() {
                     <li>«Старт Profiler» / «Стоп» — запись коммитов в приложении, сводка на странице и в консоли.</li>
                     <li>
                         «Старт Self-profiling» / «Стоп и скачать» — то же + экспорт профиля в JSON и скачивание файла.
+                        Если Self-profiling не работает, проверь в ответе сервера наличие заголовка{" "}
+                        <code>Document-Policy: js-profiling</code>.
                     </li>
                     <li>
                         В React DevTools: вкладка Profiler → Record → выполни действия → останови запись и посмотри
