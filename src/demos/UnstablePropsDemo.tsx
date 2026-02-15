@@ -41,7 +41,7 @@ const itemStyle: React.CSSProperties = {
 };
 
 function NoMemoList() {
-    const [selected, setSelected] = useState<string | null>(null);
+    const [selected, setSelected] = useState<string>(ITEMS[0]);
     return (
         <div style={blockStyle}>
             <h3 style={h3Style}>Без memo</h3>
@@ -67,7 +67,7 @@ function NoMemoList() {
  * Плохие пропсы: новые ссылки при каждом рендере родителя — memo не помогает
  */
 function BadPropsList() {
-    const [selected, setSelected] = useState<string | null>(null);
+    const [selected, setSelected] = useState<string>(ITEMS[0]);
     return (
         <div style={blockStyle}>
             <h3 style={h3Style}>С memo</h3>
@@ -93,7 +93,7 @@ function BadPropsList() {
  * Хорошие пропсы: стабильные ссылки — memo сокращает ререндеры
  */
 function GoodPropsList() {
-    const [selected, setSelected] = useState<string | null>(null);
+    const [selected, setSelected] = useState<string>(ITEMS[0]);
     const onSelect = useCallback((item: string) => {
         setSelected(item);
     }, []);

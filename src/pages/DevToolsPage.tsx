@@ -10,10 +10,16 @@ export function DevToolsPage() {
             <UnstablePropsDemo />
 
             <SpeakerHint>
-                В React DevTools Profiler в настройках General включи «Highlight updates when components render», в
-                настройках Profiler включи «Record why each component rendered while profiling» и посмотри причины
-                рендера. Счётчики рендеров на странице покажут количество рендеров каждого компонента. Для проверки
-                качества мемоизации подключи WDYR и посмотри вывод в консоль.
+                <ol>
+                    <li>
+                        В React DevTools Profiler в настройках General включи «Highlight updates when components render»
+                    </li>
+                    <li>В настройках Profiler включи «Record why each component rendered while profiling»</li>
+                    <li>Начни запись профиля, понажимай на кнопки</li>
+                    <li>Посмотри причины рендера</li>
+                    <li>Счётчики рендеров на странице покажут количество рендеров каждого компонента</li>
+                    <li>Для проверки качества мемоизации подключи WDYR и посмотри вывод в консоль</li>
+                </ol>
             </SpeakerHint>
         </div>
     );

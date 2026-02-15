@@ -16,8 +16,13 @@ export function BuildsPage() {
             <p>Render count: {count}</p>
             <button onClick={() => setX(x + 1)}>Rerender</button>
             <SpeakerHint>
-                Демо видов сборки и переключателя Strict Mode; опиши разницу между ними; открой эту страницу →
-                переключай Strict Mode → нажимай кнопку «Rerender» → смотри, как увеличивается счетчик рендеров.
+                <ol>
+                    <li>Опиши разницу между видами сборки react-dom</li>
+                    <li>
+                        Опиши влияние Strict Mode на профиль; открой эту страницу → переключай Strict Mode → нажимай
+                        кнопку «Rerender» → смотри, как увеличивается счётчик рендеров.
+                    </li>
+                </ol>
             </SpeakerHint>
         </div>
     );
