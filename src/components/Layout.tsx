@@ -24,7 +24,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             >
                 <nav style={{ display: "flex", flexDirection: "column", gap: 2 }}>
                     {nav.map(({ path, label }) => (
-                        <Link key={path} to={path} style={linkStyle}>
+                        <Link key={path} style={linkStyle} to={path}>
                             {label}
                         </Link>
                     ))}

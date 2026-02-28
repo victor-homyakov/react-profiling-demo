@@ -14,7 +14,9 @@ export function BuildsPage() {
             <p>Виды сборки react-dom: development, production и profiling.</p>
             <p>Переключатель Strict Mode.</p>
             <p>Render count: {count}</p>
-            <button onClick={() => setX(x + 1)}>Rerender</button>
+            <button onClick={() => setX(x + 1)} type="button">
+                Rerender
+            </button>
             <SpeakerHint>
                 <ol>
                     <li>Опиши разницу между видами сборки react-dom</li>

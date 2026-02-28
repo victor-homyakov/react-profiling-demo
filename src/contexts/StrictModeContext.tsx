@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 
 type StrictModeContextValue = {
     useStrictMode: boolean;
@@ -14,13 +14,9 @@ export function StrictModeProvider({
     children: ReactNode;
     defaultStrict?: boolean;
 }) {
-    const [useStrictMode, setUseStrictModeState] = useState(defaultStrict);
-    const setUseStrictMode = useCallback((value: boolean) => {
-        setUseStrictModeState(value);
-    }, []);
-    return (
-        <StrictModeContext.Provider value={{ useStrictMode, setUseStrictMode }}>{children}</StrictModeContext.Provider>
-    );
+    const [useStrictMode, setUseStrictMode] = useState(defaultStrict);
+    const value = useMemo(() => ({ useStrictMode, setUseStrictMode }), [useStrictMode, setUseStrictMode]);
+    return <StrictModeContext.Provider value={value}>{children}</StrictModeContext.Provider>;
 }
 
 export function useStrictModeContext() {

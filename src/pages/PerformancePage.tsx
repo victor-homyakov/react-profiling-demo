@@ -6,7 +6,7 @@ export function PerformancePage() {
         <div>
             <h1>4. DevTools Performance</h1>
 
-            <LightOrHeavyRenderScenario isHeavy={true} />
+            <LightOrHeavyRenderScenario isHeavy />
 
             <SpeakerHint>
                 <ol>

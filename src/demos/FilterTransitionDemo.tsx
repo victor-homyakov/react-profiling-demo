@@ -60,12 +60,12 @@ function FilterBlocking() {
         <div style={blockStyle}>
             <p style={pStyle}>список фильтруется и обновляется при каждом onChange</p>
             <input
-                type="text"
-                placeholder="Фильтр по списку"
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-                style={inputStyle}
                 aria-label="Фильтр списка (без transition)"
+                onChange={(e) => setFilter(e.target.value)}
+                placeholder="Фильтр по списку"
+                style={inputStyle}
+                type="text"
+                value={filter}
             />
             <ul style={listStyle}>
                 {filtered.map((item) => (
@@ -102,12 +102,12 @@ function FilterWithTransition() {
         <div style={blockStyle}>
             <p style={pStyle}>список фильтруется в startTransition</p>
             <input
-                type="text"
-                placeholder="Фильтр по списку"
-                value={inputValue}
-                onChange={handleChange}
-                style={inputStyle}
                 aria-label="Фильтр списка (с transition)"
+                onChange={handleChange}
+                placeholder="Фильтр по списку"
+                style={inputStyle}
+                type="text"
+                value={inputValue}
             />
             <span style={{ marginLeft: 8, fontSize: "0.85em", color: "#64748b" }}>{isPending ? "⏳" : "✅"}</span>
             <ul style={listStyle}>
@@ -147,25 +147,25 @@ export function FilterTransitionDemo() {
         <div style={{ marginTop: 16 }}>
             <section style={{ marginBottom: 24 }}>
                 <h3 style={{ margin: "0 0 8px", fontSize: "1.1em" }}>Фильтр списка ({LIST_SIZE} элементов)</h3>
-                <div style={radioGroupStyle} role="radiogroup" aria-label="Выбор варианта фильтра">
+                <div aria-label="Выбор варианта фильтра" role="radiogroup" style={radioGroupStyle}>
                     <label style={radioLabelStyle}>
                         <input
-                            type="radio"
-                            name="filter-variant"
-                            value="blocking"
                             checked={variant === "blocking"}
+                            name="filter-variant"
                             onChange={() => setVariant("blocking")}
-                        />
+                            type="radio"
+                            value="blocking"
+                        />{" "}
                         Вариант A — без useTransition
                     </label>
                     <label style={radioLabelStyle}>
                         <input
-                            type="radio"
-                            name="filter-variant"
-                            value="transition"
                             checked={variant === "transition"}
+                            name="filter-variant"
                             onChange={() => setVariant("transition")}
-                        />
+                            type="radio"
+                            value="transition"
+                        />{" "}
                         Вариант B — с useTransition
                     </label>
                 </div>

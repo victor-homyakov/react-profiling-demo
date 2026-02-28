@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from "react";
+import React, { memo, useMemo, useState } from "react";
 import { RenderCountBadge } from "../components/RenderCountBadge";
 
 const ITEMS = ["Яблоко", "Банан", "Вишня", "Дыня", "Ежевика"];
@@ -7,23 +7,11 @@ function pickRandom<T>(arr: readonly T[]): T {
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function ListItem({
-    label,
-    onSelect,
-    style,
-    data,
-}: {
-    label: string;
-    onSelect: (item: string) => void;
-    style: React.CSSProperties;
-    data: readonly string[];
-}) {
+const spanStyle = { fontSize: "0.8em", marginLeft: 8 };
+function ListItem({ style, data }: { style: React.CSSProperties; data: readonly string[] }) {
     return (
         <div style={{ ...itemStyle, ...style }}>
-            {/* <button type="button" onClick={() => onSelect(label)}>
-                {label}
-            </button> */}
-            <span style={{ fontSize: "0.8em", marginLeft: 8 }}>data.length={data.length}</span>
+            <span style={spanStyle}>data.length={data.length}</span>
             <RenderCountBadge />
         </div>
     );
@@ -46,19 +34,13 @@ function NoMemoList() {
         <div style={blockStyle}>
             <h3 style={h3Style}>Без memo</h3>
             <p style={pStyle}>новые объекты при каждом рендере</p>
-            <button type="button" onClick={() => setSelected(pickRandom(ITEMS))} style={randomButtonStyle}>
+            <button onClick={() => setSelected(pickRandom(ITEMS))} style={randomButtonStyle} type="button">
                 Случайный элемент
             </button>
             {ITEMS.map((item) => (
-                <ListItem
-                    key={item}
-                    label={item}
-                    onSelect={(value) => setSelected(value)}
-                    style={{ margin: 5 }}
-                    data={[...ITEMS]}
-                />
+                <ListItem data={[...ITEMS]} key={item} style={{ margin: 5 }} />
             ))}
-            {selected && <p style={{ marginTop: 8 }}>Выбрано: {selected}</p>}
+            <p style={{ marginTop: 8 }}>Выбрано: {selected}</p>
         </div>
     );
 }
@@ -72,19 +54,13 @@ function BadPropsList() {
         <div style={blockStyle}>
             <h3 style={h3Style}>С memo</h3>
             <p style={pStyle}>новые объекты при каждом рендере</p>
-            <button type="button" onClick={() => setSelected(pickRandom(ITEMS))} style={randomButtonStyle}>
+            <button onClick={() => setSelected(pickRandom(ITEMS))} style={randomButtonStyle} type="button">
                 Случайный элемент
             </button>
             {ITEMS.map((item) => (
-                <ListItemMemo
-                    key={item}
-                    label={item}
-                    onSelect={(value) => setSelected(value)}
-                    style={{ margin: 5 }}
-                    data={[...ITEMS]}
-                />
+                <ListItemMemo data={[...ITEMS]} key={item} style={{ margin: 5 }} />
             ))}
-            {selected && <p style={{ marginTop: 8 }}>Выбрано: {selected}</p>}
+            <p style={{ marginTop: 8 }}>Выбрано: {selected}</p>
         </div>
     );
 }
@@ -94,21 +70,18 @@ function BadPropsList() {
  */
 function GoodPropsList() {
     const [selected, setSelected] = useState<string>(ITEMS[0]);
-    const onSelect = useCallback((item: string) => {
-        setSelected(item);
-    }, []);
     const stableStyle = useMemo(() => ({ margin: 5 }), []);
     return (
         <div style={blockStyle}>
             <h3 style={h3Style}>С memo</h3>
             <p style={pStyle}>стабильные ссылки</p>
-            <button type="button" onClick={() => setSelected(pickRandom(ITEMS))} style={randomButtonStyle}>
+            <button onClick={() => setSelected(pickRandom(ITEMS))} style={randomButtonStyle} type="button">
                 Случайный элемент
             </button>
             {ITEMS.map((item) => (
-                <ListItemMemo key={item} label={item} onSelect={onSelect} style={stableStyle} data={ITEMS} />
+                <ListItemMemo data={ITEMS} key={item} style={stableStyle} />
             ))}
-            {selected && <p style={{ marginTop: 8 }}>Выбрано: {selected}</p>}
+            <p style={{ marginTop: 8 }}>Выбрано: {selected}</p>
         </div>
     );
 }

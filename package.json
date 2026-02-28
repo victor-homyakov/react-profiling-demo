@@ -8,7 +8,9 @@
         "build": "vite build",
         "build:profiling": "vite build --mode profiling",
         "preview": "npm run build && vite preview",
-        "preview:profiling": "npm run build:profiling && vite preview --mode profiling"
+        "preview:profiling": "npm run build:profiling && vite preview --mode profiling",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix"
     },
     "dependencies": {
         "react": "^19.0.0",
@@ -18,7 +20,12 @@
     "devDependencies": {
         "@types/react": "^19.0.0",
         "@types/react-dom": "^19.0.0",
+        "@typescript-eslint/eslint-plugin": "^8.55.0",
+        "@typescript-eslint/parser": "^8.55.0",
         "@vitejs/plugin-react": "^4.3.4",
+        "eslint": "^9.39.2",
+        "eslint-plugin-react": "^7.37.5",
+        "eslint-plugin-react-hooks": "^7.0.1",
         "typescript": "~5.6.2",
         "vite": "^6.0.3"
     }

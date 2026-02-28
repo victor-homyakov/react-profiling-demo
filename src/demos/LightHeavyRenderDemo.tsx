@@ -1,4 +1,4 @@
-import { Profiler as ReactProfiler, useRef, useState } from "react";
+import { Profiler as ReactProfiler, useCallback, useRef, useState } from "react";
 import { Profiler as NativeProfiler } from "../profiler/profiler";
 
 /** Искусственная задержка в рендере (для «тяжёлого» сценария) */
@@ -70,16 +70,16 @@ export function LightOrHeavyRenderScenario({ isHeavy }: { isHeavy: boolean }) {
         <div style={blockStyle}>
             <p style={pStyle}>{isHeavy ? "Тяжёлый рендер" : "Лёгкий рендер"}</p>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>
-                <button type="button" onClick={shuffle} style={buttonStyle}>
+                <button onClick={shuffle} style={buttonStyle} type="button">
                     Перемешать список
                 </button>
-                <button type="button" onClick={selectNext} style={buttonStyle}>
+                <button onClick={selectNext} style={buttonStyle} type="button">
                     Выбрать следующий
                 </button>
             </div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                 {items.map((item) => (
-                    <ListItem key={item} item={item} isSelected={item === selected} isHeavy={isHeavy} />
+                    <ListItem isHeavy={isHeavy} isSelected={item === selected} item={item} key={item} />
                 ))}
             </ul>
         </div>
@@ -148,26 +148,29 @@ export function LightHeavyRenderDemo() {
     const profilerCommitsRef = useRef<ProfilerCommit[]>([]);
     const nativeProfiler = useRef<NativeProfiler | null>(null);
 
-    function handleRender(
-        id: string,
-        phase: "mount" | "update" | "nested-update",
-        actualDuration: number,
-        baseDuration: number,
-        startTime: number,
-        commitTime: number,
-    ) {
-        const entry: ProfilerCommit = {
-            id,
-            phase,
-            actualDuration,
-            baseDuration,
-            startTime,
-            commitTime,
-        };
-        if (profilerRecording) {
-            profilerCommitsRef.current.push(entry);
-        }
-    }
+    const handleRender = useCallback(
+        function handleRender(
+            id: string,
+            phase: "mount" | "update" | "nested-update",
+            actualDuration: number,
+            baseDuration: number,
+            startTime: number,
+            commitTime: number,
+        ) {
+            const entry: ProfilerCommit = {
+                id,
+                phase,
+                actualDuration,
+                baseDuration,
+                startTime,
+                commitTime,
+            };
+            if (profilerRecording) {
+                profilerCommitsRef.current.push(entry);
+            }
+        },
+        [profilerRecording],
+    );
 
     function startProfiler() {
         profilerCommitsRef.current = [];
@@ -228,16 +231,16 @@ export function LightHeavyRenderDemo() {
                 <h3 style={{ margin: "0 0 8px", fontSize: "1.1em" }}>Режим рендера</h3>
                 <div style={{ display: "flex", gap: 8 }}>
                     <button
-                        type="button"
                         onClick={() => setIsHeavy(false)}
                         style={{ ...buttonStyle, background: !isHeavy ? "#dbeafe" : undefined }}
+                        type="button"
                     >
                         Лёгкий рендер
                     </button>
                     <button
-                        type="button"
                         onClick={() => setIsHeavy(true)}
                         style={{ ...buttonStyle, background: isHeavy ? "#dbeafe" : undefined }}
+                        type="button"
                     >
                         Тяжёлый рендер
                     </button>
@@ -247,15 +250,15 @@ export function LightHeavyRenderDemo() {
             <section style={{ marginBottom: 24 }}>
                 <h3 style={{ margin: "0 0 8px", fontSize: "1.1em" }}>Profiler (сводка на странице)</h3>
                 <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-                    <button type="button" onClick={startProfiler} disabled={profilerRecording} style={buttonStyle}>
+                    <button disabled={profilerRecording} onClick={startProfiler} style={buttonStyle} type="button">
                         Старт Profiler
                     </button>
-                    <button type="button" onClick={stopProfiler} disabled={!profilerRecording} style={buttonStyle}>
+                    <button disabled={!profilerRecording} onClick={stopProfiler} style={buttonStyle} type="button">
                         Стоп
                     </button>
-                    {profilerRecording && <span style={{ color: "#dc2626", fontWeight: 500 }}>Идёт запись…</span>}
+                    {!!profilerRecording && <span style={{ color: "#dc2626", fontWeight: 500 }}>Идёт запись…</span>}
                 </div>
-                {profilerSummary && (
+                {!!profilerSummary && (
                     <pre
                         style={{
                             background: "#f1f5f9",
@@ -275,24 +278,26 @@ export function LightHeavyRenderDemo() {
                 <h3 style={{ margin: "0 0 8px", fontSize: "1.1em" }}>Self-profiling (экспорт в JSON)</h3>
                 <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
                     <button
-                        type="button"
-                        onClick={startSelfProfiling}
                         disabled={selfProfilingRecording}
+                        onClick={startSelfProfiling}
                         style={buttonStyle}
+                        type="button"
                     >
                         Старт Self-profiling
                     </button>
                     <button
-                        type="button"
-                        onClick={stopSelfProfilingAndDownload}
                         disabled={!selfProfilingRecording}
+                        onClick={stopSelfProfilingAndDownload}
                         style={buttonStyle}
+                        type="button"
                     >
                         Стоп и скачать
                     </button>
-                    {selfProfilingRecording && <span style={{ color: "#dc2626", fontWeight: 500 }}>Идёт запись…</span>}
+                    {!!selfProfilingRecording && (
+                        <span style={{ color: "#dc2626", fontWeight: 500 }}>Идёт запись…</span>
+                    )}
                 </div>
-                {selfProfilingError && (
+                {!!selfProfilingError && (
                     <p style={{ color: "#dc2626", fontSize: "0.85em", marginTop: 8 }}>{selfProfilingError}</p>
                 )}
             </section>

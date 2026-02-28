@@ -22,7 +22,7 @@ export function BuildModeIndicator() {
                 <code style={{ background: "#cbd5e1", padding: "2px 6px", borderRadius: 4 }}>{MODE}</code>
             </span>
             <label style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                <input type="checkbox" checked={useStrictMode} onChange={(e) => setUseStrictMode(e.target.checked)} />
+                <input checked={useStrictMode} onChange={(e) => setUseStrictMode(e.target.checked)} type="checkbox" />
                 <span>Strict Mode</span>
             </label>
         </div>
