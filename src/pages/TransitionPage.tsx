@@ -1,13 +1,18 @@
 import { SpeakerHint } from "../components/SpeakerHint";
+import { FilterTransitionDemo } from "../demos/FilterTransitionDemo";
 
 export function TransitionPage() {
     return (
         <div>
             <h1>5. useTransition</h1>
-            <p>Фильтр с/без transition, медленный vs частые рендеры, UI starvation.</p>
+            <p>Отзывчивый ввод и прерванные рендеры в Profiler.</p>
+
+            <FilterTransitionDemo />
+
             <SpeakerHint>
-                Здесь будет демо фильтра с useTransition и без; в докладе: открой React Profiler → Record → быстро вводи
-                текст в поле с transition и без → сравни прерванные рендеры и отзывчивость UI.
+                В React Profiler включи запись (Record), затем быстро вводи текст в поле фильтра. В варианте A — долгие
+                рендеры, ввод лагает. В варианте B — много коротких (прерванных) рендеров, ввод более отзывчивый. В
+                strict mode длительность долгого рендера увеличивается в 2 раза (100 мс → 200 мс).
             </SpeakerHint>
         </div>
     );
