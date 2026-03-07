@@ -4,7 +4,7 @@ import { LightHeavyRenderDemo } from "../demos/LightHeavyRenderDemo";
 export function ProfilerPage() {
     return (
         <div>
-            <h1>3. React Profiler и Self-profiling API</h1>
+            <h1>4. React Profiler и Self-profiling API</h1>
             <p>Лёгкий и тяжёлый рендер, сбор данных в продакшене.</p>
 
             <LightHeavyRenderDemo />
@@ -22,8 +22,7 @@ export function ProfilerPage() {
                         <code>Document-Policy: js-profiling</code>.
                     </li>
                     <li>
-                        Профилирование в production-подобном билде:{" "}
-                        <code>npm run build:profiling && npm run preview:profiling</code>.
+                        Профилирование в production-подобном билде: <code>npm run preview:profiling</code>.
                     </li>
                 </ol>
             </SpeakerHint>

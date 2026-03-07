@@ -10,7 +10,7 @@
 
 - Создать проект: `npm create vite@latest . -- --template react-ts`.
 - Убедиться, что используется **React 19** (`react` и `react-dom` ^19) и TypeScript.
-- Установить зависимости, проверить `npm run dev` и `npm run build`.
+- Установить зависимости, проверить `npm run dev`, `npm run build`, `npm run build:profiling`.
 
 ### Шаг 0.2 — Роутинг и базовая структура
 
@@ -48,8 +48,8 @@
 - Разделы (страницы) по плану:
     1. **Сборки и окружение** — описание режимов, переключатель Strict Mode.
     2. **React DevTools** — причины рендера, мемоизация, нестабильные пропсы.
-    3. **React Profiler** — лёгкий/тяжёлый рендер, Self-profiling.
-    4. **DevTools Performance** — тяжёлый сценарий, Strict Mode.
+    3. **DevTools Performance** — тяжёлый сценарий, Strict Mode.
+    4. **React Profiler и Self-profiling API** — лёгкий/тяжёлый рендер, Self-profiling.
     5. **useTransition** — фильтр с/без transition, медленный vs частые рендеры, UI starvation.
     6. **INP и мемоизация** — GC/Layout, useMemo-кейсы, WDYR, useWhyDidYouUpdate, частые/долгие ререндеры.
     7. **Память и утечки** — queryObjects, Performance monitor, Detached, useMemo не утечка, Allocations, три снапшота.
@@ -123,11 +123,11 @@
 
 ### Шаг 5.1 — INP: задержка из-за GC или Layout, не из-за долгого рендера
 
-- **Компонент 1 — useLayoutEffect + getBoundingClientRect:** компонент, в useLayoutEffect меняющий размеры и читающий getBoundingClientRect у многих элементов или в цикле, и обновляющий state — показать блокировку paint.
+- **Компонент 1 — useLayoutEffect + getBoundingClientRect:** компонент, в useLayoutEffect меняющий размеры и читающий getBoundingClientRect у многих элементов или в цикле, и обновляющий state — показать блокировку Paint.
 - **Компонент 2 — Тяжёлый onInput без useTransition:** поле ввода, при каждом onInput выполняющее тяжёлое обновление (большой ререндер или вычисление) — субъективно «лаг» при вводе.
 - **Компонент 3 — Медленный layout:** сетка из очень большого числа элементов с тяжёлым CSS (например, много flex/grid), при обновлении которых в Performance виден долгий Layout, и кнопка, которая триггерит обновление DOM этой сетки.
 - Для каждого компонента — короткая подсказка в UI и в README.
-- Подсказка: «React может отрендериться быстро; смотри, что INP/задержка может уходить в GC или Layout».
+- Подсказка: «React может отрендериться быстро; смотри, что INP может быть в Paint/Layout».
 
 ### Шаг 5.2 — useMemo/useCallback и INP: три варианта
 
@@ -203,7 +203,7 @@
 ### Шаг 7.1 — README
 
 - Описание проекта и цели (демо для Podlodka React Crew).
-- Как запустить: `npm run dev`, `npm run build` + preview, `npm run build:profiling` + как открыть.
+- Как запустить: `npm run dev`, `npm run preview`, `npm run preview:profiling`.
 - Разделы по каждому демо: что показывать, какие инструменты открыть, что смотреть (React DevTools, Profiler, Performance, Memory, WDYR).
 - Ссылки: React DevTools, WDYR, Self-profiling API (если есть официальная дока), Chrome DevTools Memory/Performance.
 

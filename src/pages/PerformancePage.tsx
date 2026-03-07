@@ -4,7 +4,7 @@ import { LightOrHeavyRenderScenario } from "../demos/LightHeavyRenderDemo";
 export function PerformancePage() {
     return (
         <div>
-            <h1>4. DevTools Performance</h1>
+            <h1>3. DevTools Performance</h1>
 
             <LightOrHeavyRenderScenario isHeavy />
 
