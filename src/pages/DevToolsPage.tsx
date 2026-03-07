@@ -18,7 +18,18 @@ export function DevToolsPage() {
                     <li>Начни запись профиля, понажимай на кнопки</li>
                     <li>Посмотри причины рендера</li>
                     <li>Счётчики рендеров на странице покажут количество рендеров каждого компонента</li>
-                    <li>ДЗ: для проверки качества мемоизации подключи WDYR и посмотри вывод в консоль</li>
+                    <li>
+                        ДЗ: для проверки качества мемоизации подключи{" "}
+                        <a
+                            href="https://www.npmjs.com/package/@welldone-software/why-did-you-render"
+                            rel="noreferrer"
+                            target="_blank"
+                        >
+                            WDYR
+                        </a>{" "}
+                        и посмотри вывод в консоль
+                    </li>
+                    <li>ДЗ: подключи useWhyDidYouUpdate и смотри консоль при нестабильных пропсах</li>
                 </ol>
             </SpeakerHint>
         </div>

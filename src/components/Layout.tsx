@@ -7,7 +7,7 @@ const nav = [
     { path: "/performance", label: "3. DevTools Performance" },
     { path: "/profiler", label: "4. React Profiler и Self-profiling API" },
     { path: "/transition", label: "5. useTransition" },
-    { path: "/inp", label: "6. INP и мемоизация" },
+    { path: "/inp", label: "6. INP" },
     { path: "/memory", label: "7. Память и утечки" },
 ] as const;
 
