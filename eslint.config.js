@@ -46,6 +46,7 @@ export default [
             // ...react.configs.recommended.rules,
             ...react.configs.all.rules,
             ...reactHooks.configs.recommended.rules,
+            "react/destructuring-assignment": "off",
             "react/display-name": "error",
             "react/forbid-component-props": "off",
             "react/hook-use-state": "error",
