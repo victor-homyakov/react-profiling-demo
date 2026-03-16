@@ -10,7 +10,7 @@ export function SpeakerHint({ children }: { children: React.ReactNode }) {
                 padding: 16,
             }}
         >
-            <strong style={{ display: "block", marginBottom: 8, color: "#0369a1" }}>Подсказка для докладчика</strong>
+            <strong style={{ display: "block", marginBottom: 8, color: "#0369a1" }}>Подсказка</strong>
             {children}
         </aside>
     );

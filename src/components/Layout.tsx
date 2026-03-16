@@ -16,12 +16,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div style={{ display: "flex", minHeight: "100vh" }}>
             <aside
                 style={{
-                    display: "flex",
-                    flexDirection: "column",
                     background: "#fff",
                     borderRight: "1px solid #e2e8f0",
                     padding: "16px 0",
-                    width: 220,
+                    width: 200,
                 }}
             >
                 <nav style={{ display: "flex", flexDirection: "column", gap: 2 }}>

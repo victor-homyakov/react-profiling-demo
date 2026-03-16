@@ -7,12 +7,10 @@ function pickRandom<T>(arr: readonly T[]): T {
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
-const spanStyle = { fontSize: "0.8em", marginLeft: 8 };
 function ListItem({ style, data }: { style: React.CSSProperties; data: readonly string[] }) {
     return (
         <div style={{ ...itemStyle, ...style }}>
-            <span style={spanStyle}>data.length={data.length}</span>
-            <RenderCountBadge />
+            <RenderCountBadge label={`items: ${data.length}`} />
         </div>
     );
 }
@@ -20,12 +18,9 @@ function ListItem({ style, data }: { style: React.CSSProperties; data: readonly 
 const ListItemMemo = memo(ListItem);
 
 const itemStyle: React.CSSProperties = {
-    background: "#f8fafc",
-    border: "1px solid #e2e8f0",
     borderRadius: 6,
     fontSize: "0.8em",
     marginTop: 4,
-    padding: 8,
 };
 
 function NoMemoList() {
@@ -38,7 +33,7 @@ function NoMemoList() {
                 Случайный элемент
             </button>
             {ITEMS.map((item) => (
-                <ListItem data={[...ITEMS]} key={item} style={{ margin: 5 }} />
+                <ListItem data={[...ITEMS]} key={item} style={{ margin: "5px 0" }} />
             ))}
             <p style={{ marginTop: 8 }}>Выбрано: {selected}</p>
         </div>
@@ -58,7 +53,7 @@ function BadPropsList() {
                 Случайный элемент
             </button>
             {ITEMS.map((item) => (
-                <ListItemMemo data={[...ITEMS]} key={item} style={{ margin: 5 }} />
+                <ListItemMemo data={[...ITEMS]} key={item} style={{ margin: "5px 0" }} />
             ))}
             <p style={{ marginTop: 8 }}>Выбрано: {selected}</p>
         </div>
@@ -70,11 +65,11 @@ function BadPropsList() {
  */
 function GoodPropsList() {
     const [selected, setSelected] = useState<string>(ITEMS[0]);
-    const stableStyle = useMemo(() => ({ margin: 5 }), []);
+    const stableStyle = useMemo(() => ({ margin: "5px 0" }), []);
     return (
         <div style={blockStyle}>
             <h3 style={h3Style}>С memo</h3>
-            <p style={pStyle}>стабильные ссылки</p>
+            <p style={pStyle}>стабильные ссылки при каждом рендере</p>
             <button onClick={() => setSelected(pickRandom(ITEMS))} style={randomButtonStyle} type="button">
                 Случайный элемент
             </button>
@@ -102,11 +97,6 @@ const randomButtonStyle: React.CSSProperties = { cursor: "pointer", marginBottom
 export function UnstablePropsDemo() {
     return (
         <section style={{ marginTop: 24 }}>
-            <h2 style={{ fontSize: "1.1em", marginBottom: 8 }}>Нестабильные vs стабильные пропсы</h2>
-            <p style={{ color: "#64748b", fontSize: "0.95em", marginBottom: 12 }}>
-                Первый список не использует мемоизацию элементов. Второй список используют memo у элементов, но
-                нестабильные пропсы. Третий список использует memo у элементов и передаёт стабильные пропсы.
-            </p>
             <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
                 <NoMemoList />
                 <BadPropsList />

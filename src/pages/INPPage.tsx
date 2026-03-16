@@ -24,8 +24,8 @@ export function INPPage() {
                     </li>
                     <li>
                         <strong>Тяжёлый onInput</strong> — долгий Scripting + Rendering (Layout forced reflow) при
-                        частом вводе. В Performance видно, что при нескольких быстрых нажатиях keyboard interactions
-                        сразу после первого нажатия заблокированы, их INP дополнительно увеличивается (большой input
+                        частом вводе. В Performance видно, что при нескольких быстрых нажатиях сразу после первого
+                        нажатия заблокированы keyboard interactions, их INP дополнительно увеличивается (большой input
                         delay).
                     </li>
                     <li>

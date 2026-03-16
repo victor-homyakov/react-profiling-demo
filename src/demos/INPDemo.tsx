@@ -59,8 +59,8 @@ export function LayoutThrashingDemo() {
     return (
         <div style={blockStyle}>
             <p style={pStyle}>
-                {BOX_COUNT} элементов. По нажатию кнопки запускается useLayoutEffect, который синхронно читает
-                getBoundingClientRect и меняет стиль каждого элемента (layout thrashing).
+                По нажатию кнопки запускается useLayoutEffect, который синхронно читает getBoundingClientRect и меняет
+                стиль каждого элемента (layout thrashing).
             </p>
             <button onClick={handleClick} style={buttonStyle} type="button">
                 Перемерить элементы (итерация {iteration})
@@ -130,8 +130,11 @@ export function HeavyInputDemo() {
     return (
         <div style={blockStyle}>
             <p style={pStyle}>
-                При каждом нажатии клавиши заново генерируется {HEAVY_INPUT_LIST_SIZE} элементов, фильтруется список и
-                ререндерится DOM.
+                При вводе заново генерируется {HEAVY_INPUT_LIST_SIZE} элементов, фильтруется список и ререндерится DOM.
+            </p>
+            <p style={pStyle}>
+                При нескольких быстрых нажатиях у второго и последующих нажатий заблокированы keyboard interactions, в
+                их INP большой input delay.
             </p>
             <input
                 aria-label="Ввод для тяжёлого фильтра"
@@ -141,7 +144,6 @@ export function HeavyInputDemo() {
                 type="text"
                 value={query}
             />
-            <p style={{ ...pStyle, marginTop: 8 }}>Элементов: {items.length}</p>
             <ul
                 style={{
                     listStyle: "none",
@@ -211,7 +213,8 @@ export function LongListResizeDemo() {
 
     return (
         <div style={blockStyle}>
-            <p style={pStyle}>Список из {LONG_LIST_SIZE} элементов. Кнопка меняет ширину контейнера.</p>
+            <p style={pStyle}>Кнопка меняет ширину контейнера.</p>
+            <p style={pStyle}>В INP большой presentation delay.</p>
             <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 12 }}>
                 <button onClick={setRandomWidth} style={buttonStyle} type="button">
                     Изменить ширину
@@ -221,7 +224,7 @@ export function LongListResizeDemo() {
             <div
                 style={{
                     width,
-                    maxHeight: 320,
+                    maxHeight: 300,
                     overflow: "auto",
                     border: "1px solid #e2e8f0",
                     borderRadius: 6,

@@ -20,6 +20,10 @@ export function BuildsPage() {
             <SpeakerHint>
                 <ol>
                     <li>Опиши разницу между видами сборки react-dom</li>
+                    <li>Настройки сборки см. в vite.config.ts</li>
+                    <li>
+                        Запуск profiling-сборки: <code>npm run preview:profiling</code>.
+                    </li>
                     <li>
                         Опиши влияние Strict Mode на профиль; открой эту страницу → переключай Strict Mode → нажимай
                         кнопку «Rerender» → смотри, как увеличивается счётчик рендеров.

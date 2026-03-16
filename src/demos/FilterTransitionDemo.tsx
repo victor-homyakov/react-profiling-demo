@@ -25,7 +25,7 @@ const listStyle: React.CSSProperties = {
     listStyle: "none",
     padding: 0,
     margin: "12px 0 0",
-    maxHeight: 320,
+    maxHeight: 300,
     overflow: "auto",
 };
 
@@ -146,7 +146,7 @@ export function FilterTransitionDemo() {
     return (
         <div style={{ marginTop: 16 }}>
             <section style={{ marginBottom: 24 }}>
-                <h3 style={{ margin: "0 0 8px", fontSize: "1.1em" }}>Фильтр списка ({LIST_SIZE} элементов)</h3>
+                <h3 style={{ margin: "0 0 8px", fontSize: "1.1em" }}>Фильтр списка</h3>
                 <div aria-label="Выбор варианта фильтра" role="radiogroup" style={radioGroupStyle}>
                     <label style={radioLabelStyle}>
                         <input

@@ -76,10 +76,11 @@ export function MemoryPage() {
                 <ol style={olStyle}>
                     <li>Открой/закрой модалку 1 раз (прогрев) → Snapshot 1.</li>
                     <li>Открой/закрой модалку 5 раз → Snapshot 2.</li>
-                    <li>Открой/закрой модалку ещё 5 раз → Snapshot 3.</li>
+                    <li>Открой/закрой модалку ещё 1-2 раза → Snapshot 3.</li>
                     <li>
                         В Snapshot 3 выбери «Objects allocated between Snapshot 1 and Snapshot 2» — найди{" "}
-                        <code>LeakyModalContent</code>.
+                        <code>LeakyModalContent</code>. Наиболее подозрительны объекты с количеством, кратным 5
+                        (количество действий перед вторым снапшотом).
                     </li>
                 </ol>
 

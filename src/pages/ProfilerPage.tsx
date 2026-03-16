@@ -15,14 +15,15 @@ export function ProfilerPage() {
                         Выбери «Лёгкий рендер» или «Тяжёлый рендер», нажимай кнопки в блоке — в тяжёлом режиме в профиле
                         виден долгий commit.
                     </li>
-                    <li>«Старт Profiler» / «Стоп» — запись коммитов в приложении, сводка на странице и в консоли.</li>
+                    <li>
+                        «Старт Profiler» / «Стоп» — запись коммитов в приложении, сводка на странице и в консоли.
+                        Работает в development и profiling-сборке.
+                    </li>
                     <li>
                         «Старт Self-profiling» / «Стоп и скачать» — запись профиля, экспорт в JSON и скачивание файла.
                         Если Self-profiling не работает, проверь в ответе сервера наличие заголовка{" "}
-                        <code>Document-Policy: js-profiling</code>.
-                    </li>
-                    <li>
-                        Профилирование в production-подобном билде: <code>npm run preview:profiling</code>.
+                        <code>Document-Policy: js-profiling</code>. Работает во всех сборках, но наиболее точные
+                        результаты даст в production-сборке.
                     </li>
                 </ol>
             </SpeakerHint>
