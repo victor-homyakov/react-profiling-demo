@@ -16,6 +16,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div style={{ display: "flex", minHeight: "100vh" }}>
             <aside
                 style={{
+                    display: "flex",
+                    flexDirection: "column",
                     background: "#fff",
                     borderRight: "1px solid #e2e8f0",
                     padding: "16px 0",
@@ -29,6 +31,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
                         </Link>
                     ))}
                 </nav>
+                <img
+                    alt="QR code"
+                    src="/qr-code.png"
+                    style={{ width: 180, margin: "auto auto 16px", display: "block" }}
+                />
             </aside>
             <main style={{ flex: 1, padding: 24, overflow: "auto" }}>{children}</main>
         </div>
