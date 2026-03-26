@@ -1,4 +1,5 @@
-import React, { memo, useMemo, useState } from "react";
+import type React from "react";
+import { memo, useMemo, useState } from "react";
 import { RenderCountBadge } from "../components/RenderCountBadge";
 
 const ITEMS = ["Яблоко", "Банан", "Вишня", "Дыня", "Ежевика"];
@@ -82,26 +83,61 @@ function GoodPropsList() {
 }
 
 const blockStyle: React.CSSProperties = {
-    background: "#fff",
     border: "1px solid #e2e8f0",
     borderRadius: 8,
-    flex: 1,
-    minWidth: 0,
     padding: 16,
+    marginTop: 12,
 };
 
 const h3Style: React.CSSProperties = { margin: "0 0 8px", fontSize: "1em" };
 const pStyle: React.CSSProperties = { margin: "0 0 8px", fontSize: "0.9em", color: "#64748b" };
 const randomButtonStyle: React.CSSProperties = { cursor: "pointer", marginBottom: 12 };
 
+const tabStyle: React.CSSProperties = {
+    padding: "8px 16px",
+    borderRadius: "6px 6px 0 0",
+    border: "1px solid #e2e8f0",
+    borderBottom: "none",
+    background: "#f8fafc",
+    cursor: "pointer",
+    fontSize: "0.95em",
+};
+
+const activeTabStyle: React.CSSProperties = {
+    ...tabStyle,
+    background: "#fff",
+    fontWeight: 600,
+    borderBottomColor: "#fff",
+};
+
+type DemoTab = "no-memo" | "bad-props" | "good-props";
+
+const tabs: { id: DemoTab; label: string }[] = [
+    { id: "no-memo", label: "Без memo" },
+    { id: "bad-props", label: "С memo 1" },
+    { id: "good-props", label: "С memo 2" },
+];
+
 export function UnstablePropsDemo() {
+    const [activeTab, setActiveTab] = useState<DemoTab>("no-memo");
+
     return (
-        <section style={{ marginTop: 24 }}>
-            <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
-                <NoMemoList />
-                <BadPropsList />
-                <GoodPropsList />
+        <div style={{ marginTop: 16 }}>
+            <div style={{ display: "flex", gap: 4, borderBottom: "1px solid #e2e8f0" }}>
+                {tabs.map((tab) => (
+                    <button
+                        key={tab.id}
+                        onClick={() => setActiveTab(tab.id)}
+                        style={activeTab === tab.id ? activeTabStyle : tabStyle}
+                        type="button"
+                    >
+                        {tab.label}
+                    </button>
+                ))}
             </div>
-        </section>
+            {activeTab === "no-memo" && <NoMemoList />}
+            {activeTab === "bad-props" && <BadPropsList />}
+            {activeTab === "good-props" && <GoodPropsList />}
+        </div>
     );
 }
